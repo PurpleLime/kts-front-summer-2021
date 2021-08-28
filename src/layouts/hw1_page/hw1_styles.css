@@ -1,0 +1,150 @@
+:root {
+    --dark-text-color: black;
+    --default-text-color: #7e7e7e;
+    --default-border-color: #D9D9D9;
+    --link-hover-color: #208fbf;
+    --focused-input-border: #FF5555;
+    --disabled-input-color: #F9F9F9;
+    --search-button-background: linear-gradient(rgba(255, 85, 85, 1), rgba(255, 85, 85, 1));
+    --search-button-hover-background: linear-gradient(rgba(255, 85, 85, 0.7), rgba(255, 85, 85, 0.7));
+    --search-button-disabled-background: linear-gradient(rgba(217, 217, 217, 1), rgba(217, 217, 217, 1));
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--default-text-color);
+}
+
+.content {
+    width: 25vw;
+    height: 100%;
+    margin: auto;
+    padding-top: 16px;
+    display: grid;
+    justify-content: center;
+    align-items: start;
+    grid-gap: 16px;
+    overflow: auto;
+}
+
+.git-repo-tile {
+    width: 357px;
+    height: 104px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid var(--default-border-color);
+    border-radius: 6px;
+}
+
+.git-repo-tile:hover {
+    cursor: url("img/pointer.png"), pointer;
+}
+
+.git-repo-tile__avatar {
+    width: 80px;
+    height: 80px;
+    margin: 12px;
+}
+
+.git-repo-tile__data-block {
+    width: 241px;
+    height: 59px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.git-repo-tile__title {
+    width: 238px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    color: var(--dark-text-color);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.git-repo-tile__link:hover {
+    color: var(--link-hover-color);
+    cursor: url("img/pointer.png"), pointer;
+}
+
+.git-repo-tile__info-block {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.git-repo-tile__favorites-block {
+    margin-right: 20px;
+}
+
+.git-repo-tile__favorites-star {
+    width: 13px;
+    height: 13px;
+    margin-right: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.git-repo-tile__favorites-count {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.search-block {
+    width: 357px;
+    height: 54px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-block__input {
+    width: 295px;
+    height: 50px;
+    border: 1px solid var(--default-border-color);
+    border-radius: 6px;
+    padding: 17px 12px;
+}
+
+.search-block__input:focus {
+    outline: none;
+    border: 1px solid var(--focused-input-border);
+    color: var(--dark-text-color);
+}
+
+.search-block__input:disabled {
+    background: var(--disabled-input-color);
+}
+
+.search-block__button {
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    background: url("img/loupe.svg") no-repeat center / auto auto,
+    var(--search-button-background);
+}
+
+.search-block__button:hover {
+    cursor: url("img/pointer.png"), pointer;
+    background: url("img/loupe.svg") no-repeat center / auto auto,
+    var(--search-button-hover-background);
+}
+
+.search-block__button:disabled {
+    cursor: url("img/pointer.png"), pointer;
+    background: url("img/loupe.svg") no-repeat center / auto auto,
+    var(--search-button-disabled-background);
+}
