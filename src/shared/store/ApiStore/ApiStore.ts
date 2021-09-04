@@ -11,32 +11,32 @@ export default class ApiStore implements IApiStore {
     }
 
     private getRequestData<ReqT>(params: RequestParams<ReqT>): [string, RequestInit] {
-        let endpoint = `${this.baseUrl}${params.endpoint}`;
+        let finalUrl = this.baseUrl + params.endpoint;
 
         const req: RequestInit = {
             method: params.method,
-            headers: {...params.headers}
-        };
+            // headers: {...params.headers},  //так закинется только первый уровень вложенности
+            headers: params.headers,
+        }
 
         if (params.method === HTTPMethod.GET) {
-            endpoint = `${endpoint}?${qs.stringify(params.data)}`
+            finalUrl += `?${qs.stringify(params.data)}`
         }
 
         if (params.method === HTTPMethod.POST) {
             req.body = JSON.stringify(params.data);
             req.headers = {
                 ...req.headers,
-                ['Content-Type']: 'application/json;charset=UTF-8'
+                'Content-Type': 'application/json;charset=UTF-8',
             };
         }
 
-        return [endpoint, req]
-
-
+        return [finalUrl, req];
     }
 
     async request<SuccessT, ErrorT = any, ReqT = {}>(params: RequestParams<ReqT>): Promise<ApiResponse<SuccessT, ErrorT>> {
         // TODO: Напишите здесь код, который с помощью fetch будет делать запрос
+
         try {
             const response = await fetch(...this.getRequestData(params));
 
@@ -44,20 +44,20 @@ export default class ApiStore implements IApiStore {
                 return {
                     success: true,
                     data: await response.json(),
-                    status: response.status
+                    status: StatusHTTP.OK,
                 }
             }
 
             return {
                 success: false,
-                status: response.status,
-                data: await response.json()
+                data: await response.json(),
+                status: StatusHTTP.NOT_OK,
             }
         } catch (e) {
             return {
                 success: false,
-                data: null,
-                status: StatusHTTP.UNEXPECTED_ERROR
+                data: e,
+                status: StatusHTTP.UNEXPECTED_ERROR,
             }
         }
     }

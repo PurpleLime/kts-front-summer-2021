@@ -1,7 +1,8 @@
 // Перечисление методов HTTP-запроса
 export enum HTTPMethod {
-    POST = 'POST',
-    GET = 'GET'
+    // TODO: заполнить
+    GET = 'GET',
+    POST = 'POST'
 }
 
 // Параметры запроса
@@ -22,24 +23,26 @@ export type RequestParams<ReqT> = {
 export enum StatusHTTP {
     // TODO: заполнить
     UNEXPECTED_ERROR = 'UNEXPECTED_ERROR',
+    OK = 'OK',
+    NOT_OK = 'NOT_OK'
 }
 
 // Ответ API
 export type ApiResponse<SuccessT, ErrorT> =
     | {
-    success: true;
-    data: SuccessT;
-    status: number;
+    success: true,
+    data: SuccessT,
+    status: StatusHTTP,
 }
     | {
-    success: false;
-    data: ErrorT;
-    status: number;
+    success: false,
+    data: ErrorT,
+    status: StatusHTTP,
 }
     | {
     success: false,
     status: StatusHTTP,
-    data: null
+    data: any,
 }
 
 // Интерфейс для класса, с помощью которого можно делать запросы к API
